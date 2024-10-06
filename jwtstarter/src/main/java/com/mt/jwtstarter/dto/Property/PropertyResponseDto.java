@@ -1,13 +1,8 @@
 package com.mt.jwtstarter.dto.Property;
 
 
-import com.mt.jwtstarter.dto.Auth.UserResponseDto;
-import com.mt.jwtstarter.dto.PropertyImage.PropertyImagePayload;
+import com.mt.jwtstarter.dto.User.UserResponseDto;
 import com.mt.jwtstarter.model.PropertyImage;
-import com.mt.jwtstarter.model.UserEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Data;
 

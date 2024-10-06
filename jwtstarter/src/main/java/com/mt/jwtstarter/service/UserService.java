@@ -2,16 +2,14 @@ package com.mt.jwtstarter.service;
 
 
 
-import com.mt.jwtstarter.dto.Auth.UserResponseDto;
+import com.mt.jwtstarter.dto.User.UserResponseDto;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 public interface UserService {
 
     Long getUserId();
 
-    UserResponseDto getUserProfileById(Long userId);
+
 
     Boolean checkUsernameAvailability(String username);
 
@@ -20,4 +18,5 @@ public interface UserService {
     Page<UserResponseDto> searchForUser(String query, int pageNumber, int pageSize);
 
 
+    UserResponseDto getUserById(Long id);
 }

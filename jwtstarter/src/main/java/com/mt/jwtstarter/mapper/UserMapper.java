@@ -2,7 +2,7 @@ package com.mt.jwtstarter.mapper;
 
 
 
-import com.mt.jwtstarter.dto.Auth.UserResponseDto;
+import com.mt.jwtstarter.dto.User.UserResponseDto;
 import com.mt.jwtstarter.model.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

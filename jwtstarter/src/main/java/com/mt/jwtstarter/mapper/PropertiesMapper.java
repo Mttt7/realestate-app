@@ -1,18 +1,15 @@
 package com.mt.jwtstarter.mapper;
 
 
-import com.mt.jwtstarter.dto.Auth.UserResponseDto;
 import com.mt.jwtstarter.dto.Property.PropertyRequestDto;
 import com.mt.jwtstarter.dto.Property.PropertyResponseDto;
 import com.mt.jwtstarter.model.Property;
 import com.mt.jwtstarter.model.PropertyImage;
 import com.mt.jwtstarter.repository.PropertyImageRepository;
 import com.mt.jwtstarter.service.AuthService;
-import com.mt.jwtstarter.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 import static com.mt.jwtstarter.mapper.UserMapper.mapToUserResponseDto;

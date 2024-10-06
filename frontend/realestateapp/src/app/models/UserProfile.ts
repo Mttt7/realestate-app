@@ -1,3 +1,5 @@
+import { Property } from './Property';
+
 //import { Role } from './Role';
 export interface UserProfile {
   id: number;
@@ -10,5 +12,6 @@ export interface UserProfile {
   photoUrl: string;
   backgroundUrl: string;
   createdAt: Date;
+  properties: Property[];
   //roles: Role[];
 }

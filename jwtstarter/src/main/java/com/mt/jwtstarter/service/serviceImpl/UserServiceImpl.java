@@ -1,9 +1,11 @@
 package com.mt.jwtstarter.service.serviceImpl;
 
-import com.mt.jwtstarter.dto.Auth.UserResponseDto;
+import com.mt.jwtstarter.dto.User.UserResponseDto;
 import com.mt.jwtstarter.exception.UserNotFound;
+import com.mt.jwtstarter.mapper.PropertiesMapper;
 import com.mt.jwtstarter.mapper.UserMapper;
 import com.mt.jwtstarter.model.UserEntity;
+import com.mt.jwtstarter.repository.PropertyRepository;
 import com.mt.jwtstarter.repository.UserRepository;
 import com.mt.jwtstarter.service.AuthService;
 import com.mt.jwtstarter.service.UserService;
@@ -23,8 +25,8 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final AuthService authService;
-
+    private final PropertyRepository propertyRepository;
+    private final PropertiesMapper propertiesMapper;
 
     @Override
     public Long getUserId() {
@@ -33,12 +35,7 @@ public class UserServiceImpl implements UserService {
         return user.getId();
     }
 
-    @Override
-    public UserResponseDto getUserProfileById(Long userId) {
-        return UserMapper.mapToUserResponseDto(userRepository.findById(userId).orElseThrow(
-                ()-> new UserNotFound("User Not found!"))
-        );
-    }
+
 
     @Override
     public Boolean checkUsernameAvailability(String username) {
@@ -66,5 +63,17 @@ public class UserServiceImpl implements UserService {
                 PageRequest.of(pageNumber,pageSize),
                 users.getTotalElements()
         );
+    }
+
+    @Override
+    public UserResponseDto getUserById(Long id) {
+        UserEntity user = userRepository.findById(id).orElseThrow(
+                ()-> new UserNotFound("User Not found!")
+        );
+       UserResponseDto userResponse = UserMapper.mapToUserResponseDto(user);
+        propertyRepository.findAllByAuthorId(id).forEach(property -> {
+            userResponse.addProperty(propertiesMapper.mapToPropertyResponseDto(property));
+        } );
+        return userResponse;
     }
 }

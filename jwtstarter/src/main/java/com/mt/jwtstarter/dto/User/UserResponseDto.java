@@ -1,11 +1,13 @@
-package com.mt.jwtstarter.dto.Auth;
+package com.mt.jwtstarter.dto.User;
 
 
+import com.mt.jwtstarter.dto.Property.PropertyResponseDto;
 import com.mt.jwtstarter.model.Role;
 import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,4 +23,12 @@ public class UserResponseDto {
 
     private Timestamp createdAt;
     private List<Role> roles;
+    private List<PropertyResponseDto> properties;
+
+    public void addProperty(PropertyResponseDto property){
+        if(properties == null){
+            properties = new ArrayList<>();
+        }
+        properties.add(property);
+    }
 }

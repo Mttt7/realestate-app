@@ -27,6 +27,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment.development';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { environment } from '../environments/environment.development';
     PropertyViewComponent,
     AddComponent,
     LoaderComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
