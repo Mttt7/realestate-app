@@ -1,0 +1,8 @@
+<div
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center justify-center gap-x-10 mt-20"
+>
+  <app-property-small-view
+    *ngFor="let property of properties"
+    [property]="property"
+  ></app-property-small-view>
+</div>

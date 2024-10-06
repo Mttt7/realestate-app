@@ -1,0 +1,9 @@
+[33mdc661c6[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{0}: reset: moving to HEAD~1
+[33m709207f[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m HEAD@{1}: commit (amend): ✨ uploading photos + adding new property
+[33m641d284[m HEAD@{2}: commit: ✨ uploading photos + adding new property
+[33mdc661c6[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m HEAD@{3}: commit: ✨ property view + model
+[33mb963981[m HEAD@{4}: commit: ✨ add display all and favourites feature
+[33m1bbe6bb[m HEAD@{5}: commit: ✨ init commit
+[33m7fbd0b8[m HEAD@{6}: reset: moving to 7fbd0b8dd10bc9fd34b4fb9d1606ff71160fe788
+[33m99d9069[m HEAD@{7}: commit: ✨ init commit
+[33m7fbd0b8[m HEAD@{8}: clone: from https://github.com/Mttt7/realestate.git

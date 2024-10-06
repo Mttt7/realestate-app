@@ -1,0 +1,24 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { PropertyViewComponent } from './components/property-view/property-view.component';
+import { AddComponent } from './components/add/add.component';
+
+const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'favorites', component: FavoritesComponent },
+  { path: 'add', component: AddComponent },
+  { path: 'properties/:id', component: PropertyViewComponent },
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}

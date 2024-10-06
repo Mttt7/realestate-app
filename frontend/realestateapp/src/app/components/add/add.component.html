@@ -1,0 +1,405 @@
+<app-loader *ngIf="loading"></app-loader>
+<div class="mt-20 w-full" *ngIf="!loading">
+  <div class="form-control mb-4">
+    <label for="photos" class="label">
+      <span class="label-text">Upload Photos</span>
+    </label>
+    <div
+      class="border-dashed border-2 border-gray-400 rounded-lg p-4 cursor-pointer"
+      (click)="fileInput.click()"
+      (drop)="onDrop($event)"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+    >
+      <p class="text-center">
+        Drag and drop your photos here, or click to select files
+      </p>
+      <input
+        #fileInput
+        id="photos"
+        type="file"
+        multiple
+        accept="image/*"
+        (change)="onFileSelected($event)"
+        class="hidden"
+      />
+    </div>
+
+    <div *ngIf="photosPreview.length > 0" class="mt-4">
+      <h3 class="text-lg mb-2">Selected Photos:</h3>
+      <div class="flex flex-wrap items-center justify-start gap-4 m-3">
+        <div class="overflow-x-auto w-full mx-2">
+          <table class="table">
+            <!-- head -->
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- row 1 -->
+              <tr
+                *ngFor="let photo of photosPreview; let i = index"
+                class="relative"
+                (dragstart)="onDragStart($event, i)"
+                (dragover)="onDragOverPhoto($event)"
+                (drop)="onDropPhoto($event, i)"
+                (dragleave)="onDragLeavePhoto($event)"
+                [attr.draggable]="true"
+              >
+                <th
+                  class="hover:cursor-move flex items-center justify-between w-full"
+                >
+                  <img
+                    [src]="photo.url"
+                    alt="Photo Preview"
+                    class="h-20 rounded-lg"
+                  />
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-error m-2 ml-auto"
+                    (click)="removePhoto(i)"
+                  >
+                    Remove
+                  </button>
+                </th>
+                <td *ngIf="photo.name.length > 15">
+                  {{ getShortenedFileName(photo.name) }}
+                </td>
+                <td *ngIf="photo.name.length <= 15">
+                  {{ photo.name }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p class="text-sm text-gray-500">{{ photos.length }}/10</p>
+    <p class="text-sm text-gray-500">Minimum 5, Maximum 10 photos</p>
+  </div>
+  <form
+    [formGroup]="propertyForm"
+    (ngSubmit)="onSubmit()"
+    class="p-6 bg-white rounded-lg shadow-md w-full"
+  >
+    <div class="form-control mb-4">
+      <label for="name" class="label">
+        <span class="label-text">Name*</span>
+      </label>
+      <input
+        id="name"
+        formControlName="name"
+        type="text"
+        class="input input-bordered w-full"
+      />
+    </div>
+    <div class="flex items-center justify-evenly gap-4">
+      <div class="form-control mb-4">
+        <label for="price" class="label">
+          <span class="label-text">Price $*</span>
+        </label>
+        <input
+          id="price"
+          formControlName="price"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+      <div class="form-control mb-4">
+        <label for="sizeMeters" class="label">
+          <span class="label-text">Size (in meters)*</span>
+        </label>
+        <input
+          id="sizeMeters"
+          formControlName="sizeMeters"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+      <div class="form-control mb-4">
+        <label for="rent" class="label">
+          <span class="label-text">Rent $*</span>
+        </label>
+        <input
+          id="rent"
+          formControlName="rent"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+    </div>
+    <div class="flex items-center justify-evenly gap-4">
+      <div class="form-control mb-4">
+        <label for="country" class="label">
+          <span class="label-text">Country*</span>
+        </label>
+        <input
+          id="country"
+          formControlName="country"
+          type="text"
+          class="input input-bordered w-full"
+        />
+      </div>
+
+      <div class="form-control mb-4">
+        <label for="city" class="label">
+          <span class="label-text">City*</span>
+        </label>
+        <input
+          id="city"
+          formControlName="city"
+          type="text"
+          class="input input-bordered w-full"
+        />
+      </div>
+    </div>
+
+    <div class="flex items-center justify-evenly gap-4">
+      <div class="form-control mb-4">
+        <label for="street" class="label">
+          <span class="label-text">Street</span>
+        </label>
+        <input
+          id="street"
+          formControlName="street"
+          type="text"
+          class="input input-bordered w-full"
+        />
+      </div>
+      <div class="form-control mb-4">
+        <label for="address" class="label">
+          <span class="label-text">Building number</span>
+        </label>
+        <input
+          id="address"
+          formControlName="address"
+          type="text"
+          class="input input-bordered w-full"
+        />
+      </div>
+    </div>
+
+    <div class="form-control mb-4">
+      <label for="description" class="label">
+        <span class="label-text">Description*</span>
+      </label>
+      <textarea
+        id="description"
+        formControlName="description"
+        class="textarea textarea-bordered w-full"
+      ></textarea>
+    </div>
+
+    <div class="form-control mb-4">
+      <label for="estate" class="label">
+        <span class="label-text">Estate*</span>
+      </label>
+      <input
+        id="estate"
+        formControlName="estate"
+        type="text"
+        class="input input-bordered w-full"
+      />
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="form-control mb-4">
+        <label for="floor" class="label">
+          <span class="label-text">Floor</span>
+        </label>
+        <input
+          id="floor"
+          formControlName="floor"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+
+      <div class="form-control mb-4">
+        <label for="floors" class="label">
+          <span class="label-text">Total floors in building*</span>
+        </label>
+        <input
+          id="floorCount"
+          formControlName="floorCount"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+
+      <div class="form-control mb-4">
+        <label for="floors" class="label">
+          <span class="label-text">Floors*</span>
+        </label>
+        <input
+          id="floors"
+          formControlName="floors"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="form-control mb-4">
+        <label for="rooms" class="label">
+          <span class="label-text">Rooms*</span>
+        </label>
+        <input
+          id="rooms"
+          formControlName="rooms"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+
+      <div class="form-control mb-4">
+        <label for="bathrooms" class="label">
+          <span class="label-text">Bathrooms*</span>
+        </label>
+        <input
+          id="bathrooms"
+          formControlName="bathrooms"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+      <div class="form-control mb-4">
+        <label for="parkingSpaces" class="label">
+          <span class="label-text">Parking Spaces*</span>
+        </label>
+        <input
+          id="parkingSpaces"
+          formControlName="parkingSpaces"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <div class="form-control mb-4">
+        <label for="balconies" class="label">
+          <span class="label-text">Balconies*</span>
+        </label>
+        <input
+          id="balconies"
+          formControlName="balconies"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+
+      <div class="form-control mb-4">
+        <label for="yearOfConstruction" class="label">
+          <span class="label-text">Year of Construction*</span>
+        </label>
+        <input
+          id="yearOfConstruction"
+          formControlName="yearOfConstruction"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+
+      <div class="form-control mb-4">
+        <label for="availableFrom" class="label">
+          <span class="label-text">Available From*</span>
+        </label>
+        <input
+          id="availableFrom"
+          formControlName="availableFrom"
+          type="number"
+          class="input input-bordered w-full"
+        />
+      </div>
+    </div>
+    <div class="form-control mb-4">
+      <label for="elevator" class="cursor-pointer label">
+        <span class="label-text">Elevator*</span>
+        <input
+          id="elevator"
+          formControlName="elevator"
+          type="checkbox"
+          class="toggle"
+        />
+      </label>
+    </div>
+
+    <div class="flex items-center justify-around gap-1">
+      <div class="form-control mb-4">
+        <label for="windows" class="label">
+          <span class="label-text">Windows Type*</span>
+        </label>
+        <select
+          id="windows"
+          formControlName="windows"
+          class="select select-bordered w-full"
+        >
+          <option value="">choose</option>
+          <option value="wooden">Wooden</option>
+          <option value="plastic">Plastic</option>
+          <option value="aluminum">Aluminum</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="form-control mb-4">
+        <label for="heating" class="label">
+          <span class="label-text">Heating*</span>
+        </label>
+        <select
+          id="heating"
+          formControlName="heating"
+          class="select select-bordered w-full"
+        >
+          <option value="">choose</option>
+          <option value="central">Central Heating</option>
+          <option value="gas">Gas Heating</option>
+          <option value="electric">Electric Heating</option>
+          <option value="solar">Solar Heating</option>
+          <option value="none">None</option>
+        </select>
+      </div>
+
+      <div class="form-control mb-4">
+        <label for="levelOfFinish" class="label">
+          <span class="label-text">Level of Finish*</span>
+        </label>
+        <select
+          id="levelOfFinish"
+          formControlName="levelOfFinish"
+          class="select select-bordered w-full"
+        >
+          <option value="">choose</option>
+          <option value="raw">Raw</option>
+          <option value="partiallyFinished">Partially Finished</option>
+          <option value="fullyFinished">Fully Finished</option>
+          <option value="luxury">Luxury Finish</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-control mb-4">
+      <label for="resaleMarket" class="cursor-pointer label">
+        <span class="label-text">Resale Market*</span>
+        <input
+          id="resaleMarket"
+          formControlName="resaleMarket"
+          type="checkbox"
+          class="toggle"
+        />
+      </label>
+    </div>
+
+    <button
+      type="submit"
+      class="btn btn-primary w-full"
+      [disabled]="!propertyForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>

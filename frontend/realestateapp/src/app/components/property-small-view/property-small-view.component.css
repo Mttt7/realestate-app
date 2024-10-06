@@ -1,0 +1,4 @@
+.rotate {
+    transform: scale(130%); /* Możesz dostosować wartość */
+    transition: transform 0.4s ease-in-out;
+  }

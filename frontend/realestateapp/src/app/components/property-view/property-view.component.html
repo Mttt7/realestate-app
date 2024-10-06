@@ -1,0 +1,147 @@
+<div *ngIf="!property">
+  <app-loader></app-loader>
+</div>
+
+<div
+  *ngIf="property"
+  class="flex flex-col items-center justify-start w-full mt-20"
+>
+  <div class="flex items-center justify-center gap-2 my-3">
+    <div>
+      <img
+        [src]="property.images[0].url"
+        class="sm:h-[18.5rem] xl:h-[28.5rem] rounded-tl-lg rounded-bl-lg"
+        alt=""
+      />
+    </div>
+    <div class="grid grid-cols-2 grid-rows-2 gap-2">
+      <img
+        [src]="property.images[1].url"
+        class="sm:w-36 xl:w-56 aspect-square object-cover"
+        alt=""
+      />
+      <img
+        [src]="property.images[2].url"
+        class="sm:w-36 xl:w-56 aspect-square object-cover rounded-tr-lg"
+        alt=""
+      />
+      <img
+        [src]="property.images[3].url"
+        class="sm:w-36 xl:w-56 aspect-square object-cover"
+        alt=""
+      />
+      <img
+        [src]="property.images[4].url"
+        class="sm:w-36 xl:w-56 aspect-square object-cover rounded-br-lg"
+        alt=""
+      />
+    </div>
+  </div>
+  <div class="flex items-start w-[85%] justify-center gap-3 m-2">
+    <div
+      class="flex-[3] flex flex-col items-center justify-start border-1 border-black"
+    >
+      <div
+        class="flex items-start justify-center gap-2 px-2 text-sm text-gray-500"
+      >
+        <div class="text-xl">🛏️{{ property.rooms }}</div>
+        <div class="text-xl">🚽{{ property.bathrooms }}</div>
+        <div class="text-xl">🚗{{ property.parkingSpaces }}</div>
+        <div class="text-xl">📏{{ property.sizeMeters }} m²</div>
+      </div>
+      <h2 class="font-semibold text-left tracking-tight text-2xl mt-2">
+        {{ property.name }}
+      </h2>
+      <div class="text-sm text-gray-500 text-left px-2">
+        {{ property.description }}
+      </div>
+      <div class="w-56 h-40 bg-white my-2 rounded-xl shadow-lg"></div>
+    </div>
+    <div
+      class="flex-[1] flex flex-col items-center justify-start border-[1px] sticky top-0 p-4 border-slate-100 shadow-2xl mt-2 bg-slate-100 rounded-md"
+    >
+      <div
+        class="mt-auto w-56 py-3 px-2 max-w-sm mx-auto bg-white rounded-xl shadow-lg flex items-center gap-3"
+      >
+        <img
+          class="block h-16 rounded-full sm:mx-0 sm:shrink-0"
+          [src]="property.author.photoUrl"
+        />
+        <div class="text-center sm:text-left">
+          <div class="">
+            <p class="text-lg text-black font-semibold">
+              {{ property.author.firstName }} {{ property.author.lastName }}
+            </p>
+            <p class="text-slate-500 font-medium text-xs">
+              member since {{ property.author.createdAt | date : "yyyy" }}
+            </p>
+          </div>
+          <button
+            class="px-4 py-1 text-sm text-primary font-semibold rounded-full border border-primary hover:text-white hover:bg-primary hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+          >
+            Profile
+          </button>
+        </div>
+      </div>
+      <div class="text-2xl font-semibold mt-2">${{ property.price }}</div>
+      <div class="text-xs mb-2 italic">to negotiation</div>
+
+      <div class="btn btn-wide btn-primary text-white">Contact</div>
+    </div>
+  </div>
+  <div class="overflow-x-auto w-full mx-2">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- row 1 -->
+        <tr>
+          <th>floor</th>
+          <td>{{ property.floor }}/{{ property.floors }}</td>
+        </tr>
+        <!-- row 2 -->
+        <tr>
+          <th>rooms</th>
+          <td>{{ property.rooms }}</td>
+        </tr>
+        <!-- row 3 -->
+        <tr>
+          <th>bathrooms</th>
+          <td>{{ property.bathrooms }}</td>
+        </tr>
+        <tr>
+          <th>size m²</th>
+          <td>{{ property.sizeMeters }}</td>
+        </tr>
+        <tr>
+          <th>balconies</th>
+          <td>{{ property.balconies }}</td>
+        </tr>
+        <tr>
+          <th>rent</th>
+          <td>${{ property.rent }}</td>
+        </tr>
+        <tr>
+          <th>available in</th>
+          <td>{{ property.availableFrom }} months</td>
+        </tr>
+        <tr>
+          <th>elevator</th>
+          <td>{{ property.elevator ? "yes" : "no" }}</td>
+        </tr>
+        <tr>
+          <th>year of construction</th>
+          <td>{{ property.yearOfConstruction }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
