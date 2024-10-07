@@ -8,8 +8,16 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'realestateapp';
+  id: string = '';
 
   constructor(private authService: AuthService) {}
+  ngOnInit(): void {
+    if (this.userIsLoggedIn()) {
+      this.id = this.authService.getLoggedInUserId()!;
+    } else {
+      this.id = '';
+    }
+  }
 
   userIsLoggedIn(): boolean {
     return this.authService.userIsLoggedIn();

@@ -18,7 +18,7 @@
       <a routerLink="/register" class="ml-4 text-blue-500">Register</a>
     </div>
     <div class="ml-auto mr-6" *ngIf="userIsLoggedIn()">
-      <a routerLink="/profile" class="ml-4 text-blue-500">Profile</a>
+      <a [routerLink]="'users/' + id" class="ml-4 text-blue-500">Profile</a>
     </div>
   </div>
 
