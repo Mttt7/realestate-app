@@ -26,6 +26,8 @@ public class PropertyController {
         return ResponseEntity.ok(properties);
     }
 
+
+
     @GetMapping("/{propertyId}")
     public ResponseEntity<PropertyResponseDto> getPropertyById(@PathVariable Long propertyId){
         PropertyResponseDto property = propertyService.getPropertyById(propertyId);

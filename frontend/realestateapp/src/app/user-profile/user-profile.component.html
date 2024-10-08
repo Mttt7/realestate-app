@@ -36,7 +36,7 @@
         member since {{ userProfile.createdAt | date : "yyyy" }}
       </p>
       <p class="text-xl font-semibold">
-        {{ userProfile.properties.length }} properties
+        {{ userProfile.properties!.length }} properties
       </p>
       <div
         class="text mt-3 font-semibold text-wrap w-[16rem] italic text-black flex flex-col items-start justify-center"

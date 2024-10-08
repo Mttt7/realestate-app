@@ -23,12 +23,7 @@ public class UserResponseDto {
 
     private Timestamp createdAt;
     private List<Role> roles;
-    private List<PropertyResponseDto> properties;
 
-    public void addProperty(PropertyResponseDto property){
-        if(properties == null){
-            properties = new ArrayList<>();
-        }
-        properties.add(property);
-    }
+
+
 }

@@ -1,9 +1,11 @@
 package com.mt.jwtstarter.service.serviceImpl;
 
+import com.mt.jwtstarter.dto.Property.PropertyResponseDto;
 import com.mt.jwtstarter.dto.User.UserResponseDto;
 import com.mt.jwtstarter.exception.UserNotFound;
 import com.mt.jwtstarter.mapper.PropertiesMapper;
 import com.mt.jwtstarter.mapper.UserMapper;
+import com.mt.jwtstarter.model.Property;
 import com.mt.jwtstarter.model.UserEntity;
 import com.mt.jwtstarter.repository.PropertyRepository;
 import com.mt.jwtstarter.repository.UserRepository;
@@ -70,10 +72,22 @@ public class UserServiceImpl implements UserService {
         UserEntity user = userRepository.findById(id).orElseThrow(
                 ()-> new UserNotFound("User Not found!")
         );
-       UserResponseDto userResponse = UserMapper.mapToUserResponseDto(user);
-        propertyRepository.findAllByAuthorId(id).forEach(property -> {
-            userResponse.addProperty(propertiesMapper.mapToPropertyResponseDto(property));
-        } );
-        return userResponse;
+
+        return UserMapper.mapToUserResponseDto(user);
+    }
+
+    @Override
+    public Page<PropertyResponseDto> getUserProperties(Long id, int pageSize, int pageNumber) {
+        Page<Property> properties =  propertyRepository.findAllByAuthorId(id, PageRequest.of(
+                pageNumber,
+                pageSize,
+                Sort.by("createdAt").descending()
+        ));
+
+        return new PageImpl<>(properties.getContent().stream().map(propertiesMapper::mapToPropertyResponseDto).collect(Collectors.toList()),
+                PageRequest.of(pageNumber,pageSize),
+                properties.getTotalElements());
+
+
     }
 }

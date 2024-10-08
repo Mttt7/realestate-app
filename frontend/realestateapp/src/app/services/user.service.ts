@@ -15,6 +15,17 @@ export class UserService {
     return this.http.get<UserProfile>(this.userUrl + `/${userId}`);
   }
 
+  getUserProperties(
+    userId: number,
+    pageNumber: number,
+    pageSize: number
+  ): Observable<any> {
+    return this.http.get<any>(
+      this.userUrl +
+        `/${userId}/properties?pageNumber=${pageNumber}&pageSize=${pageSize}`
+    );
+  }
+
   updateUserProfile(user: any): Observable<UserProfile> {
     //zmienic na odpowiednie!!
     return this.http.patch<any>(this.userUrl, user);

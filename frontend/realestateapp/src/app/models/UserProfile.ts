@@ -12,6 +12,6 @@ export interface UserProfile {
   photoUrl: string;
   backgroundUrl: string;
   createdAt: Date;
-  properties: Property[];
+  properties?: Property[];
   //roles: Role[];
 }

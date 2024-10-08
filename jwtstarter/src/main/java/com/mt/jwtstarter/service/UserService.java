@@ -2,6 +2,7 @@ package com.mt.jwtstarter.service;
 
 
 
+import com.mt.jwtstarter.dto.Property.PropertyResponseDto;
 import com.mt.jwtstarter.dto.User.UserResponseDto;
 import org.springframework.data.domain.Page;
 
@@ -19,4 +20,6 @@ public interface UserService {
 
 
     UserResponseDto getUserById(Long id);
+
+    Page<PropertyResponseDto> getUserProperties(Long id, int pageSize, int pageNumber);
 }
