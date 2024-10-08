@@ -1,6 +1,6 @@
 package com.mt.jwtstarter.service.serviceImpl;
 
-import com.mt.jwtstarter.dto.Thread.ThreadResponseDto;
+import com.mt.jwtstarter.dto.Thread.ThreadMessageDetailsResponseDto;
 import com.mt.jwtstarter.mapper.ThreadMapper;
 import com.mt.jwtstarter.model.ThreadMessage;
 import com.mt.jwtstarter.repository.ThreadRepository;
@@ -22,7 +22,7 @@ public class ThreadServiceImpl implements ThreadService {
     private final AuthService authService;
     private final ThreadMapper threadMapper;
     @Override
-    public Page<ThreadResponseDto> getAllThreads(int pageNumber, int pageSize) {
+    public Page<ThreadMessageDetailsResponseDto> getAllThreads(int pageNumber, int pageSize) {
         Page<ThreadMessage> response = threadRepository.findAllByUserOneIdOrUserTwoId(
                 authService.getLoggedUser().getId(), PageRequest.of(
                         pageNumber,
@@ -37,4 +37,15 @@ public class ThreadServiceImpl implements ThreadService {
         );
 
     }
+
+    @Override
+    public ThreadMessage createThread(Long id, Long userId) {
+        ThreadMessage threadMessage = new ThreadMessage();
+        threadMessage.setUserOneId(id);
+        threadMessage.setUserTwoId(userId);
+        return threadRepository.save(threadMessage);
+
+    }
+
+
 }

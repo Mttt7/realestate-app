@@ -68,12 +68,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDto getUserById(Long id) {
+    public UserResponseDto getUserDtoById(Long id) {
         UserEntity user = userRepository.findById(id).orElseThrow(
                 ()-> new UserNotFound("User Not found!")
         );
 
         return UserMapper.mapToUserResponseDto(user);
+    }
+
+    @Override
+    public UserEntity getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(
+                ()-> new UserNotFound("User Not found!")
+        );
     }
 
     @Override

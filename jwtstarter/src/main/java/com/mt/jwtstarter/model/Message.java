@@ -25,6 +25,10 @@ public class Message {
     @JoinColumn(name = "author_id")
     private UserEntity author;
 
+    @ManyToOne
+    @JoinColumn(name = "reciver_id")
+    private UserEntity receiver;
+
     @Column(name = "content")
     private String content;
 

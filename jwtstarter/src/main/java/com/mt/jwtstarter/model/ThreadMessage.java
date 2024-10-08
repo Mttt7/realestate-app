@@ -27,4 +27,9 @@ public class ThreadMessage {
 
     @Column(name = "user_two_id")
     private Long userTwoId;
+
+    public void addMessage(String message){
+        this.lastMessage = message;
+        this.lastMessageDate = new Timestamp(System.currentTimeMillis());
+    }
 }
