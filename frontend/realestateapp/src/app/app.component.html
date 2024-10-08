@@ -17,7 +17,13 @@
       <a routerLink="/login" class="ml-4 text-blue-500">Login</a>
       <a routerLink="/register" class="ml-4 text-blue-500">Register</a>
     </div>
-    <div class="ml-auto mr-6" *ngIf="userIsLoggedIn()">
+    <div class="ml-auto" *ngIf="userIsLoggedIn()">
+      <a routerLink="messages/" class="ml-4 text-blue-500">📭 Messages</a>
+      <a routerLink="messages/" class="ml-4 text-blue-500" *ngIf="false"
+        >📬 Messages</a
+      >
+    </div>
+    <div class="mr-6" *ngIf="userIsLoggedIn()">
       <a [routerLink]="'users/' + id" class="ml-4 text-blue-500">Profile</a>
     </div>
   </div>

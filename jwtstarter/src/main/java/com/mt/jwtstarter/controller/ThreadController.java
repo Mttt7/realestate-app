@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/threads")
+@RequestMapping("/api/v1/thread")
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class ThreadController {
