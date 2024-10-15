@@ -3,6 +3,7 @@
   <div
     *ngFor="let thread of threads"
     class="flex gap-3 bg-white p-2 rounded-md shadow-md cursor-pointer border-transparent border-[1px] hover:border-black"
+    [routerLink]="['/messages', thread.id]"
   >
     <div class="flex gap-2 items-center justify-center mr-3">
       <img

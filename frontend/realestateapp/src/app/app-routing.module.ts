@@ -7,12 +7,14 @@ import { FavoritesComponent } from './components/favorites/favorites.component';
 import { PropertyViewComponent } from './components/property-view/property-view.component';
 import { AddComponent } from './components/add/add.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { MessageComponent } from './message/message.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageThreadComponent } from './message-thread/message-thread.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'users/:id', component: UserProfileComponent },
-  { path: 'messages', component: MessageComponent },
+  { path: 'messages', component: MessagesComponent },
+  { path: 'messages/:id', component: MessageThreadComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },

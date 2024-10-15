@@ -15,7 +15,7 @@ import {
 } from '@angular/common/http';
 import { AuthInterceptorService } from './services/auth-interceptor.service';
 import { HomeComponent } from './components/home/home.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PropertySmallViewComponent } from './components/property-small-view/property-small-view.component';
 import { FavoritesComponent } from './components/favorites/favorites.component';
 import { PropertyViewComponent } from './components/property-view/property-view.component';
@@ -28,7 +28,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../environments/environment.development';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { MessageComponent } from './message/message.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MessageThreadComponent } from './message-thread/message-thread.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { MessageComponent } from './message/message.component';
     AddComponent,
     LoaderComponent,
     UserProfileComponent,
-    MessageComponent,
+    MessagesComponent,
+    MessageThreadComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +61,7 @@ import { MessageComponent } from './message/message.component';
     }),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    FormsModule,
   ],
   providers: [
     provideHttpClient(withInterceptorsFromDi()),

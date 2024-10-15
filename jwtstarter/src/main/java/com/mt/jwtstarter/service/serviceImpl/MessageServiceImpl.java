@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
@@ -55,7 +56,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public ThreadMessageResponseDto get20LastMessages(Long id, int pageNumber) {
         ThreadMessage threadMessage = threadRepository.findById(id).orElseThrow(()->new RuntimeException("Thread not found"));
-        Page<Message> messages = messageRepository.findLast20Messages(id, PageRequest.of(pageNumber,20));
+        Page<Message> messages = messageRepository.findLast20Messages(id, PageRequest.of(pageNumber,20, Sort.by("createdAt").descending()));
 
         return ThreadMessageResponseDto.builder()
                 .messages(new PageImpl<>(

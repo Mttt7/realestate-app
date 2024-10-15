@@ -4,11 +4,11 @@ import { ThreadDetails } from '../models/ThreadDetails';
 import { formatDistanceToNow } from 'date-fns';
 
 @Component({
-  selector: 'app-message',
-  templateUrl: './message.component.html',
-  styleUrl: './message.component.css',
+  selector: 'app-messages',
+  templateUrl: './messages.component.html',
+  styleUrl: './messages.component.css',
 })
-export class MessageComponent {
+export class MessagesComponent {
   threads: ThreadDetails[] = [];
   loading: boolean = false;
 
